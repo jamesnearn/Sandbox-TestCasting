@@ -1,0 +1,25 @@
+﻿using System;
+
+namespace Sandbox_TestCasting
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // See https://musthaan.com/2013/03/20/difference-between-c-cast-syntax-and-the-as-operators/
+
+            Console.WriteLine("Start");
+            object testValue = DBNull.Value;
+
+            Console.WriteLine("Test 'as operator'");
+            decimal? doesWork = testValue as decimal?;
+
+            Console.WriteLine("Test cast syntax - this should cause a runtime error!");
+            // Unhandled Exception: System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Nullable`1[System.Decimal]'.
+            //    at Sandbox_TestCasting.Program.Main(String[] args) in C:\_code\Sandbox-TestCasting\Program.cs:line 22
+            decimal? doesntWork = (decimal?) testValue;
+
+            Console.WriteLine("End.");
+        }
+    }
+}
